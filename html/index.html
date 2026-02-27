@@ -1,43 +1,38 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YEIZ - Login</title>
   <link rel="stylesheet" href="../css/style.css" />
-  <title>Browser</title>
 </head>
-
 <body>
   <div class="wrapper">
-  <form action="">
-  <h1>LOGIN</h1>
-  <div class="input-box">
-    <input type="text" placeholder="username" required>
-      <i class="bx bxs-lock-user"></i>
-   </div>
-   
-   <div class="input-box">
-    <input type="text" placeholder="password" required>
-      <i class="bx bxs-lock-lock-alt"></i>
-   </div>
-  
-    <div class="remember-forgo">
-     <label><input type="checkbox">Rmember me</label>
-     <a href="#">forgot password?</a>
-   </div>
-    
-   <button type="submit" class="btn">login</button>
-   
-   <div class="rigister-link">
-     <p>don`t have an account? <a href="#">register</a></p>
+    <form id="login-form" novalidate>
+      <div style="text-align:center; margin-bottom: 12px;">
+        <img src="../imag/logo.jpeg" alt="Logo" style="width:90px; border-radius: 50%; border: 2px solid rgba(255,255,255,.45);" />
       </div>
-      </form>
-    </div>
 
-    <!-- módulo JS que inicializa la app -->
-    <script type="module" src="../scrip/main.js"></script>
+      <h1>INICIAR SESIÓN</h1>
+
+      <div class="input-box">
+        <input id="email" name="email" type="email" placeholder="admin@example.com" required />
+      </div>
+
+      <div class="input-box">
+        <input id="password" name="password" type="password" placeholder="Contraseña" required />
+      </div>
+
+      <div id="login-error" style="display:none; margin: 0 0 14px; padding: 10px 14px; border-radius: 8px; background: rgba(220,53,69,.85); color: #fff; font-size: 14px;"></div>
+
+      <button type="submit" class="btn">Entrar</button>
+
+      <div class="register-link">
+        <p>Usuario demo: <strong>admin@example.com</strong> / <strong>123456</strong></p>
+      </div>
+    </form>
+  </div>
+
+  <script type="module" src="../scrip/main.js"></script>
 </body>
-
 </html>
