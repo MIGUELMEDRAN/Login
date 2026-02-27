@@ -1,34 +1,40 @@
-import AuthService from '../services/AuthService.js';
-import User from '../models/User.js';
-
 export default class LoginController {
-  constructor(formElement, authService) {
+  constructor(formElement, errorElement, authService) {
     this.form = formElement;
+    this.errorElement = errorElement;
     this.authService = authService;
     this.attachEvents();
   }
 
   attachEvents() {
-    this.form.addEventListener('submit', ev => {
-      ev.preventDefault();
-      const username =
-        this.form.querySelector('input[placeholder="username"], input[placeholder="nombre de usuario"]').value;
-      const password =
-        this.form.querySelector('input[type="password"]').value ||
-        this.form.querySelector('input[placeholder="password"]').value;
-      this.handleLogin(username, password);
+    this.form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = this.form.email.value;
+      const password = this.form.password.value;
+      this.handleLogin(email, password);
     });
   }
 
-  async handleLogin(username, password) {
+  async handleLogin(email, password) {
     try {
-      const user = new User(username, password);
-      const result = await this.authService.login(user);
-      console.log('Login successful', result);
-      // redirect or show success message
-    } catch (err) {
-      console.error('Login failed', err);
-      alert('Error al iniciar sesión');
+      this.showError('');
+      const data = await this.authService.login(email, password);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      window.location.href = './variedades.html';
+    } catch (error) {
+      this.showError(error.message);
     }
+  }
+
+  showError(message) {
+    if (!message) {
+      this.errorElement.style.display = 'none';
+      this.errorElement.textContent = '';
+      return;
+    }
+
+    this.errorElement.textContent = message;
+    this.errorElement.style.display = 'block';
   }
 }
